@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Pablo Ramón Guevara">
+  <title>Pronosticando el físico</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="./reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="./reveal.js/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="./reveal.js/dist/theme/simple.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-background-color="#0080ff">
+  <h1 class="title">Pronosticando el físico</h1>
+  <p class="subtitle">Aprendizaje automático para predecir el cambio del
+cuerpo al perder peso</p>
+  <p class="author">Pablo Ramón Guevara</p>
+  <p class="date">24/07/2023</p>
+</section>
+
+<section id="resumen-rápido" class="slide level2">
+<h2>Resumen rápido</h2>
+<p>Hemos usado un modelo del cuerpo 3D y una red neuronal para predecir
+cómo cambia el cuerpo durante un régimen de pérdida de peso.</p>
+<hr>
+<div>
+<ul>
+<li class="fragment"><p>Revisión de la literatura sobre modelar cuerpos
+humanos en 3D.</p></li>
+<li class="fragment"><p>Procesamiento y limpieza de los datos
+disponibles.</p></li>
+<li class="fragment"><p>Desarrollo e implementación de una red
+neuronal.</p></li>
+</ul>
+</div>
+</section>
+<section>
+<section id="representación-del-cuerpo-en-3d"
+class="title-slide slide level1">
+<h1>Representación del cuerpo en 3D</h1>
+
+</section>
+<section id="taxonomía-de-modelos" class="slide level2">
+<h2>Taxonomía de modelos</h2>
+<p>Basada en los tipos de entradas y salidas:</p>
+</section>
+<section class="slide level2">
+
+<h3 id="entrada">Entrada</h3>
+<ul>
+<li><p>2D</p></li>
+<li><p>3D</p></li>
+<li><p>Modelos paramétricos</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="salida">Salida</h3>
+<ul>
+<li><p>Espacio 2D</p></li>
+<li><p>Mallas 3D</p></li>
+<li><p>Vóxels 3D</p></li>
+<li><p><em>NeRF</em></p></li>
+</ul>
+</section>
+<section id="modelos-paramétricos" class="slide level2">
+<h2>Modelos paramétricos</h2>
+<p>Representar y generar modelos 3D basados en parámetros
+ajustables.</p>
+</section>
+<section class="slide level2">
+
+<h3 id="skinned-multi-person-linear-model-smpl">Skinned Multi-Person
+Linear Model (SMPL)</h3>
+<p>Divide un cuerpo en:</p>
+<ul>
+<li>10 parámetros de forma <span
+class="math inline">\(\beta\)</span></li>
+<li>72 parámetros de pose <span
+class="math inline">\(\theta\)</span></li>
+</ul>
+</section></section>
+<section>
+<section id="análisis-de-datos-y-preprocesamiento"
+class="title-slide slide level1">
+<h1>Análisis de datos y preprocesamiento</h1>
+
+</section>
+<section class="slide level2">
+
+<h3 id="datos-disponibles">Datos disponibles</h3>
+<ul>
+<li>80 pacientes</li>
+<li>400 sesiones</li>
+<li>200 escaneos 3D</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div style="font-size: 0.5em">
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 44%" />
+<col style="width: 37%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tipo</th>
+<th>Fuente</th>
+<th>Medidas (unidad)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Antropométrico</td>
+<td>Cinta métrica flexible</td>
+<td><ul>
+<li>Muñeca (cm)</li>
+<li>Cintura (cm)</li>
+<li>Cadera (cm)</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td>Composición corporal</td>
+<td><ul>
+<li>Báscula Tanita MC 780-P MA</li>
+<li>Estadiómetro Seca 213</li>
+</ul></td>
+<td><ul>
+<li>Grasa por extremidad y tronco (%)</li>
+<li>Músculo por extremidad y tronco (%)</li>
+<li>Grasa total y músculo (%)</li>
+<li>Área de grasa visceral (cm²)</li>
+<li>Peso (kg)</li>
+<li>Altura (m)</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td>Otro, Estilo de vida</td>
+<td>Entrevista</td>
+<td><ul>
+<li>Actividad (puntuación)</li>
+<li>Género</li>
+<li>Edad (años)</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td>Sangre (capilar)</td>
+<td>Accutrend Plus</td>
+<td><ul>
+<li>Glucosa (mg/dL)</li>
+<li>Colesterol (mg/dL)</li>
+<li>Triglicéridos (mg/dL)</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td>Presión arterial</td>
+<td>Omron M3</td>
+<td><ul>
+<li>Presión sistólica (mmHg)</li>
+<li>Presión diastólica (mmHg)</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>Tech4Diet</em></p>
+</section>
+<section class="slide level2">
+
+<h3 id="sistema-escaneo-3d">Sistema escaneo 3D</h3>
+<figure>
+<img data-src="img/cameras_scan.png" style="width:50.0%"
+alt="Sistema escaneo 3D" />
+<figcaption aria-hidden="true">Sistema escaneo 3D</figcaption>
+</figure>
+<p>13 cámaras <em>Intel Realsense RGB-D</em>.</p>
+</section>
+<section class="slide level2">
+
+<h3 id="extracción-de-parámetros-smpl">Extracción de parámetros
+SMPL</h3>
+<ul>
+<li><p>Adquisición de modelos 3D.</p></li>
+<li><p>Estimación de plantilla intermedia BPS.</p></li>
+<li><p>Primera minimización.</p></li>
+<li><p>Segunda minimización.</p></li>
+</ul>
+<p>Garcia-D’Urso et al. (2023). <em>Accurate estimation of parametric
+models of the human body from 3d point clouds</em></p>
+</section></section>
+<section>
+<section id="redes-neuronales" class="title-slide slide level1">
+<h1>Redes neuronales</h1>
+
+</section>
+<section id="análisis-de-arquitecturas-para-sequencias"
+class="slide level2">
+<h2>Análisis de arquitecturas para sequencias</h2>
+<p>Tipos planteados:</p>
+<ul>
+<li><p>Recurrentes</p>
+<ul>
+<li><p>RNN</p></li>
+<li><p>LSTM</p></li>
+<li><p>GRU</p></li>
+</ul></li>
+<li><p>Transformers</p></li>
+</ul>
+</section>
+<section id="desarrollo-de-una-red-neuronal" class="slide level2">
+<h2>Desarrollo de una red neuronal</h2>
+<p>PyTorch</p>
+<p>Basada en LSTM</p>
+</section>
+<section class="slide level2">
+
+<figure>
+<img data-src="./img/nn_diagram.png" style="width:40.0%"
+alt="Diagrama de la red" />
+<figcaption aria-hidden="true">Diagrama de la red</figcaption>
+</figure>
+</section></section>
+<section id="resultados" class="title-slide slide level1">
+<h1>Resultados</h1>
+
+</section>
+    </div>
+  </div>
+
+  <script src="./reveal.js/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="./reveal.js/plugin/notes/notes.js"></script>
+  <script src="./reveal.js/plugin/search/search.js"></script>
+  <script src="./reveal.js/plugin/zoom/zoom.js"></script>
+  <script src="./reveal.js/plugin/math/math.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        math: {
+          mathjax: 'MathJax-2.7.3/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>
