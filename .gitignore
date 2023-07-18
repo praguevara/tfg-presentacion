@@ -1,0 +1,5 @@
+MathJax-2.7.3/*
+node_modules/*
+reveal.js/*
+package.json
+package-lock.json
