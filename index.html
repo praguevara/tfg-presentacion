@@ -35,86 +35,89 @@ cuerpo al perder peso</p>
   <p class="date">24/07/2023</p>
 </section>
 
-<section id="resumen-rápido" class="slide level2">
-<h2>Resumen rápido</h2>
+<section id="section" class="slide level2" data-auto-animate="">
+<h2 data-auto-animate=""></h2>
 <p>Hemos usado un modelo del cuerpo 3D y una red neuronal para predecir
 cómo cambia el cuerpo durante un régimen de pérdida de peso.</p>
-<hr>
-<div>
-<ul>
-<li class="fragment"><p>Revisión de la literatura sobre modelar cuerpos
-humanos en 3D.</p></li>
-<li class="fragment"><p>Procesamiento y limpieza de los datos
-disponibles.</p></li>
-<li class="fragment"><p>Desarrollo e implementación de una red
-neuronal.</p></li>
-</ul>
-</div>
 </section>
-<section>
-<section id="representación-del-cuerpo-en-3d"
-class="title-slide slide level1">
-<h1>Representación del cuerpo en 3D</h1>
-
+<section id="section-1" class="slide level2" data-auto-animate="">
+<h2 data-auto-animate=""></h2>
+<p>Hemos usado un modelo del cuerpo 3D y una red neuronal para predecir
+cómo cambia el cuerpo durante un régimen de pérdida de peso.</p>
+<ul>
+<li><p>Revisión de la literatura sobre modelar cuerpos humanos en
+3D.</p></li>
+<li><p>Procesamiento y limpieza de los datos disponibles.</p></li>
+<li><p>Desarrollo e implementación de una red neuronal.</p></li>
+</ul>
+</section>
+<section id="representación-del-cuerpo-en-3d" class="slide level2">
+<h2>Representación del cuerpo en 3D</h2>
+</section>
+<section id="revisión-de-la-literatura" class="slide level2">
+<h2>Revisión de la literatura</h2>
+<p><img data-src="img/iwann.png" /></p>
+<p>Presentada en la conferencia IWANN 2023.</p>
 </section>
 <section id="taxonomía-de-modelos" class="slide level2">
 <h2>Taxonomía de modelos</h2>
 <p>Basada en los tipos de entradas y salidas:</p>
-</section>
-<section class="slide level2">
-
-<h3 id="entrada">Entrada</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="entradas">Entradas</h3>
 <ul>
-<li><p>2D</p></li>
+<li><p>2D (imágenes, vídeos…)</p></li>
 <li><p>3D</p></li>
 <li><p>Modelos paramétricos</p></li>
 </ul>
-</section>
-<section class="slide level2">
-
-<h3 id="salida">Salida</h3>
+</div><div class="column" style="width:50%;">
+<h3 id="salidas">Salidas</h3>
 <ul>
 <li><p>Espacio 2D</p></li>
 <li><p>Mallas 3D</p></li>
 <li><p>Vóxels 3D</p></li>
 <li><p><em>NeRF</em></p></li>
 </ul>
+</div>
+</div>
 </section>
 <section id="modelos-paramétricos" class="slide level2">
 <h2>Modelos paramétricos</h2>
 <p>Representar y generar modelos 3D basados en parámetros
 ajustables.</p>
 </section>
-<section class="slide level2">
-
-<h3 id="skinned-multi-person-linear-model-smpl">Skinned Multi-Person
-Linear Model (SMPL)</h3>
-<p>Divide un cuerpo en:</p>
+<section id="skinned-multi-person-linear-model-smpl"
+class="slide level2">
+<h2>Skinned Multi-Person Linear Model (SMPL)</h2>
+<div class="r-stretch">
+<p>Permite descomponer un cuerpo en:</p>
 <ul>
+<li>Malla de topología estática <span
+class="math inline">\(T\)</span></li>
 <li>10 parámetros de forma <span
 class="math inline">\(\beta\)</span></li>
 <li>72 parámetros de pose <span
 class="math inline">\(\theta\)</span></li>
 </ul>
-</section></section>
-<section>
-<section id="análisis-de-datos-y-preprocesamiento"
-class="title-slide slide level1">
-<h1>Análisis de datos y preprocesamiento</h1>
-
+</div>
+<p><img data-src="img/SMPL_formulation.png" height="200" /></p>
 </section>
-<section class="slide level2">
-
-<h3 id="datos-disponibles">Datos disponibles</h3>
+<section id="análisis-de-datos-y-preprocesamiento" class="slide level2">
+<h2>Análisis de datos y preprocesamiento</h2>
+</section>
+<section id="datos-disponibles" class="slide level2">
+<h2>Datos disponibles</h2>
+<div class="fragment">
 <ul>
 <li>80 pacientes</li>
 <li>400 sesiones</li>
 <li>200 escaneos 3D</li>
 </ul>
+</div>
 </section>
 <section class="slide level2">
 
-<div style="font-size: 0.5em">
+<div style="font-size: 16px">
 <table>
 <colgroup>
 <col style="width: 18%" />
@@ -182,35 +185,101 @@ class="title-slide slide level1">
 </tbody>
 </table>
 </div>
-<p><em>Tech4Diet</em></p>
+<p><small></p>
+<p>N. García-D’urso, P. Climent-Pérez, M. Sánchez-Sansegundo, A.
+Zaragoza-Martí, A. Fuster-Guilló and J. Azorín-López,</p>
+<p>“<a href="https://doi.org/10.1109/ACCESS.2022.3178419"><em>A
+Non-Invasive Approach for Total Cholesterol Level Prediction Using
+Machine Learning</em></a>,”</p>
+<p>in <em>IEEE Access</em>, vol. 10, pp. 58566-58577, 2022, doi: <a
+href="https://doi.org/10.1109/ACCESS.2022.3178419">10.1109/ACCESS.2022.3178419</a>.</p>
+<p></small></p>
 </section>
-<section class="slide level2">
-
-<h3 id="sistema-escaneo-3d">Sistema escaneo 3D</h3>
-<figure>
-<img data-src="img/cameras_scan.png" style="width:50.0%"
-alt="Sistema escaneo 3D" />
-<figcaption aria-hidden="true">Sistema escaneo 3D</figcaption>
-</figure>
+<section id="limpieza-de-datos" class="slide level2">
+<h2>Limpieza de datos</h2>
+<p>Creación de proceso de análisis y limpieza de datos usando la
+biblioteca <em>pandas</em>.</p>
+<div class="fragment">
+<ul>
+<li><p>Detección de casos atípicos.</p>
+<ul>
+<li><p>Suma de músculo y grasa &gt; 100 %.</p></li>
+<li><p>Diferencias grandes entre medidas de extremidades.</p></li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><p>Errores decimales.</p>
+<ul>
+<li>Omisión de separador decimal o unidades erróneas.</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="filtrado-de-la-variable-peso" class="slide level2"
+data-auto-animate="">
+<h2 data-auto-animate="">Filtrado de la variable “peso”</h2>
+<img data-src="img/weight_unfiltered.png" class="r-stretch" />
+</section>
+<section id="filtrado-de-la-variable-peso-1" class="slide level2"
+data-auto-animate="">
+<h2 data-auto-animate="">Filtrado de la variable “peso”</h2>
+<div class="columns">
+<div class="column">
+<p><img data-src="img/weight_unfiltered.png" /></p>
+<p>Sin filtrar</p>
+</div><div class="column">
+<p><img data-src="img/weight_filtered.png" /></p>
+<p>Filtrado</p>
+</div>
+</div>
+</section>
+<section id="sistema-escaneo-3d" class="slide level2">
+<h2>Sistema escaneo 3D</h2>
+<p><img data-src="img/cameras_scan.png" style="width:50.0%" /></p>
 <p>13 cámaras <em>Intel Realsense RGB-D</em>.</p>
 </section>
+<section id="extracción-de-parámetros-smpl" class="slide level2"
+data-auto-animate="">
+<h2 data-auto-animate="">Extracción de parámetros <em>SMPL</em></h2>
+<p><small> N. García-D’Urso et al., “Accurate estimation of parametric
+models of the human body from 3d point clouds” </small></p>
+</section>
+<section id="extracción-de-parámetros-smpl-1" class="slide level2"
+data-auto-animate="">
+<h2 data-auto-animate="">Extracción de parámetros <em>SMPL</em></h2>
+<p><img data-src="img/pipeline_smpl.png" /></p>
+</section>
 <section class="slide level2">
 
-<h3 id="extracción-de-parámetros-smpl">Extracción de parámetros
-SMPL</h3>
+<div class="r-fit-text">
+<ol type="1">
+<li><p>Adquisición de modelos 3D.</p>
 <ul>
-<li><p>Adquisición de modelos 3D.</p></li>
-<li><p>Estimación de plantilla intermedia BPS.</p></li>
-<li><p>Primera minimización.</p></li>
-<li><p>Segunda minimización.</p></li>
-</ul>
-<p>Garcia-D’Urso et al. (2023). <em>Accurate estimation of parametric
-models of the human body from 3d point clouds</em></p>
-</section></section>
-<section>
-<section id="redes-neuronales" class="title-slide slide level1">
-<h1>Redes neuronales</h1>
-
+<li><p>Capturar una nube de puntos con las 13 cámaras RGB-D.</p></li>
+<li><p>Reducir ruido y optimizar alineamiento</p></li>
+</ul></li>
+<li><p>Estimación de plantilla intermedia con <em>BPS</em>.</p>
+<ul>
+<li><p>Codificar la nube de puntos usando <em>Basis Point
+Set</em>.</p></li>
+<li><p>Predecir posiciones de vértices con una <em>NN</em>.</p></li>
+</ul></li>
+<li><p>Primera minimización.</p>
+<ul>
+<li>Minimizar parámetros <em>SMPL</em> para alinearlo con la plantilla
+creada con <em>BPS</em>.</li>
+</ul></li>
+<li><p>Segunda minimización.</p>
+<ul>
+<li>Alinear modelo <em>SMPL</em> con el escaneo original.</li>
+</ul></li>
+</ol>
+</div>
+</section>
+<section id="red-neuronal" class="slide level2">
+<h2>Red neuronal</h2>
 </section>
 <section id="análisis-de-arquitecturas-para-sequencias"
 class="slide level2">
@@ -226,22 +295,90 @@ class="slide level2">
 <li><p>Transformers</p></li>
 </ul>
 </section>
-<section id="desarrollo-de-una-red-neuronal" class="slide level2">
-<h2>Desarrollo de una red neuronal</h2>
-<p>PyTorch</p>
-<p>Basada en LSTM</p>
+<section id="problemas" class="slide level2" data-auto-animate="">
+<h2 data-auto-animate="">Problemas</h2>
+<h3 id="pacientes-con-distinto-número-de-sesiones.">Pacientes con
+distinto número de sesiones.</h3>
+<h3
+id="pacientes-con-sesiones-espaciadas-irregularmente-o-faltantes.">Pacientes
+con sesiones espaciadas irregularmente o faltantes.</h3>
+</section>
+<section id="problemas-1" class="slide level2" data-auto-animate="">
+<h2 data-auto-animate="">Problemas</h2>
+<h3 id="pacientes-con-distinto-número-de-sesiones.-1">Pacientes con
+distinto número de sesiones.</h3>
+<p>Las redes recurrentes son flexibles respecto a la longitud de
+secuencia.</p>
+<h3
+id="pacientes-con-sesiones-espaciadas-irregularmente-o-faltantes.-1">Pacientes
+con sesiones espaciadas irregularmente o faltantes.</h3>
+</section>
+<section id="problemas-2" class="slide level2" data-auto-animate="">
+<h2 data-auto-animate="">Problemas</h2>
+<h3 id="pacientes-con-distinto-número-de-sesiones.-2">Pacientes con
+distinto número de sesiones.</h3>
+<p>Las redes recurrentes son flexibles respecto a la longitud de
+secuencia.</p>
+<h3
+id="pacientes-con-sesiones-espaciadas-irregularmente-o-faltantes.-2">Pacientes
+con sesiones espaciadas irregularmente o faltantes.</h3>
+<p>En vez de predecir la siguiente sesión, predecir el cambio
+diario.</p>
 </section>
 <section class="slide level2">
 
-<figure>
-<img data-src="./img/nn_diagram.png" style="width:40.0%"
-alt="Diagrama de la red" />
-<figcaption aria-hidden="true">Diagrama de la red</figcaption>
-</figure>
-</section></section>
-<section id="resultados" class="title-slide slide level1">
-<h1>Resultados</h1>
+<div class="columns">
+<div class="column">
+<p><img data-src="./img/nn_diagram.png" height="500" /></p>
+</div><div class="column">
+<h3 id="detalles-de-la-arquitectura">Detalles de la arquitectura</h3>
+<p>Añadimos una conexión residual para calcular la variación entre
+sesiones.</p>
+<p>Calculamos los días entre sesiones y multiplicamos las predicciones
+por ese valor.</p>
+</div>
+</div>
+<div class="r-fit-text">
+<p><span class="math inline">\(X : ([B, [T_1, ..., T_{Nmax - 1}],
+[\beta, Height, Weight, Age, Sex]], Days)\)</span> <span
+class="math inline">\(Y : [B, [T_2, ..., T_{Nmax}], [\beta, Height,
+Weight, Age, Sex]]\)</span></p>
+</div>
+</section>
+<section class="slide level2">
 
+<p>Desarrollamos la red neuronal utilizando la biblioteca
+<em>PyTorch</em> con aceleración por <em>GPU</em>.</p>
+<p>Implementamos una búsqueda de cuadrícula de hiperparámetros.</p>
+<p>Entrenamos usando un <em>learning rate</em> dinámico y el optimizador
+<em>AdamW</em>, con validación <em>5-fold</em>.</p>
+<p><img data-src="img/loss.png" /></p>
+</section>
+<section id="resultados" class="slide level2">
+<h2>Resultados</h2>
+</section>
+<section class="slide level2">
+
+<p><img data-src="img/mae_folds.png" /></p>
+<p>Error medio por parámetro <span
+class="math inline">\(\beta\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<p><img data-src="img/predictions_beta/beta_1.png"
+style="width:19.0%" /> <img data-src="img/predictions_beta/beta_2.png"
+style="width:19.0%" /> <img data-src="img/predictions_beta/beta_3.png"
+style="width:19.0%" /> <img data-src="img/predictions_beta/beta_4.png"
+style="width:19.0%" /> <img data-src="img/predictions_beta/beta_5.png"
+style="width:19.0%" /></p>
+<p><img data-src="img/predictions_beta/beta_6.png"
+style="width:19.0%" /> <img data-src="img/predictions_beta/beta_7.png"
+style="width:19.0%" /> <img data-src="img/predictions_beta/beta_8.png"
+style="width:19.0%" /> <img data-src="img/predictions_beta/beta_9.png"
+style="width:19.0%" /> <img data-src="img/predictions_beta/beta_10.png"
+style="width:19.0%" /></p>
+<p>Predicciones de parámetros <span
+class="math inline">\(\beta\)</span>.</p>
 </section>
     </div>
   </div>
