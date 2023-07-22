@@ -160,6 +160,8 @@ in _IEEE Access_, vol. 10, pp. 58566-58577, 2022, doi: [10.1109/ACCESS.2022.3178
 
 ## Limpieza de datos
 
+::::: r-fit-text
+
 Creación de proceso de análisis y limpieza de datos usando
 la biblioteca _pandas_.
 
@@ -180,6 +182,8 @@ la biblioteca _pandas_.
     - Omisión de separador decimal o unidades erróneas.
 
 :::
+
+:::::
 
 --- 
 
@@ -342,12 +346,24 @@ $Y : [B, [T_2, ..., T_{Nmax}], [\beta, Height, Weight, Age, Sex]]$
 Desarrollamos la red neuronal utilizando la biblioteca _PyTorch_ con aceleración
 por _GPU_.
 
-Implementamos una búsqueda de cuadrícula de hiperparámetros.
+Implementamos una búsqueda de malla de hiperparámetros.
 
 Entrenamos usando un _learning rate_ dinámico y el optimizador _AdamW_, con 
 validación _5-fold_.
 
-![](img/loss.png)
+![](img/loss.png){.r-stretch}
+
+---
+
+| **Hiper-parámetro**                  | **Valor** |
+|-------------------------------------|-----------|
+| Tamaño del lote (_Batch size_)        | 32        |
+| Número de capas en la entrada       | 4         |
+| Número de capas en el LSTM          | 4         |
+| Número de capas en la salida        | 4         |
+| Tamaño oculto ($H$)                 | 32        |
+| Decaimiento de peso (_Weight decay_)  | 0.001     |
+
 
 
 
@@ -376,3 +392,39 @@ Error medio por parámetro $\beta$.
 
 Predicciones de parámetros $\beta$.
 
+---
+
+<div class="r-stretch">
+
+<video controls loop autoplay>
+    <source src='2.mp4' type="video/mp4">
+</video>
+
+
+</div>
+
+_Ground truth_ y predicciones de un paciente.
+
+---
+
+## Discusión
+
+- Escala de tiempo pequeña para aprender dinámicas a largo plazo.
+- Error alto en el _ground truth_.
+
+---
+
+## Posibles futuras líneas de trabajo 
+
+::: r-fit-text
+
+- **Recolección de Datos**: Los pacientes podrían enviar imágenes en lugar de escaneos 3D _in-situ_ para tener más datos.
+- **Arquitectura de Red Neuronal**: Aunque elegimos la arquitectura _LSTM_, se podrían explorar otras, como Transformers, buscando mejoras en el rendimiento de predicción.
+- **Modelos Paramétricos**: Considerar otros modelos como _STAR_ como alternativas o complementos al modelo _SMPL_ utilizado.
+- **Renderizado de Salida**: Explorar _SMPLpix_ para renderizar en 2D. Usando el mismo modelo y parámetros predichos, podríamos generar imágenes realistas de los cuerpos en lugar de depender de modelos 3D.
+
+:::
+
+---
+
+### Muchas gracias

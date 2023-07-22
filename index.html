@@ -197,6 +197,7 @@ href="https://doi.org/10.1109/ACCESS.2022.3178419">10.1109/ACCESS.2022.3178419</
 </section>
 <section id="limpieza-de-datos" class="slide level2">
 <h2>Limpieza de datos</h2>
+<div class="r-fit-text">
 <p>Creación de proceso de análisis y limpieza de datos usando la
 biblioteca <em>pandas</em>.</p>
 <div class="fragment">
@@ -215,6 +216,7 @@ biblioteca <em>pandas</em>.</p>
 <li>Omisión de separador decimal o unidades erróneas.</li>
 </ul></li>
 </ul>
+</div>
 </div>
 </section>
 <section id="filtrado-de-la-variable-peso" class="slide level2"
@@ -349,10 +351,47 @@ Weight, Age, Sex]]\)</span></p>
 
 <p>Desarrollamos la red neuronal utilizando la biblioteca
 <em>PyTorch</em> con aceleración por <em>GPU</em>.</p>
-<p>Implementamos una búsqueda de cuadrícula de hiperparámetros.</p>
+<p>Implementamos una búsqueda de malla de hiperparámetros.</p>
 <p>Entrenamos usando un <em>learning rate</em> dinámico y el optimizador
 <em>AdamW</em>, con validación <em>5-fold</em>.</p>
-<p><img data-src="img/loss.png" /></p>
+<img data-src="img/loss.png" class="r-stretch" />
+</section>
+<section class="slide level2">
+
+<table>
+<thead>
+<tr class="header">
+<th><strong>Hiper-parámetro</strong></th>
+<th><strong>Valor</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Tamaño del lote (<em>Batch size</em>)</td>
+<td>32</td>
+</tr>
+<tr class="even">
+<td>Número de capas en la entrada</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>Número de capas en el LSTM</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>Número de capas en la salida</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>Tamaño oculto (<span class="math inline">\(H\)</span>)</td>
+<td>32</td>
+</tr>
+<tr class="even">
+<td>Decaimiento de peso (<em>Weight decay</em>)</td>
+<td>0.001</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="resultados" class="slide level2">
 <h2>Resultados</h2>
@@ -379,6 +418,47 @@ style="width:19.0%" /> <img data-src="img/predictions_beta/beta_10.png"
 style="width:19.0%" /></p>
 <p>Predicciones de parámetros <span
 class="math inline">\(\beta\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<div class="r-stretch">
+
+<video controls loop autoplay>
+<source src='2.mp4' type="video/mp4">
+</video>
+</div>
+<p><em>Ground truth</em> y predicciones de un paciente.</p>
+</section>
+<section id="discusión" class="slide level2">
+<h2>Discusión</h2>
+<ul>
+<li>Escala de tiempo pequeña para aprender dinámicas a largo plazo.</li>
+<li>Error alto en el <em>ground truth</em>.</li>
+</ul>
+</section>
+<section id="posibles-futuras-líneas-de-trabajo" class="slide level2">
+<h2>Posibles futuras líneas de trabajo</h2>
+<div class="r-fit-text">
+<ul>
+<li><strong>Recolección de Datos</strong>: Los pacientes podrían enviar
+imágenes en lugar de escaneos 3D <em>in-situ</em> para tener más
+datos.</li>
+<li><strong>Arquitectura de Red Neuronal</strong>: Aunque elegimos la
+arquitectura <em>LSTM</em>, se podrían explorar otras, como
+Transformers, buscando mejoras en el rendimiento de predicción.</li>
+<li><strong>Modelos Paramétricos</strong>: Considerar otros modelos como
+<em>STAR</em> como alternativas o complementos al modelo <em>SMPL</em>
+utilizado.</li>
+<li><strong>Renderizado de Salida</strong>: Explorar <em>SMPLpix</em>
+para renderizar en 2D. Usando el mismo modelo y parámetros predichos,
+podríamos generar imágenes realistas de los cuerpos en lugar de depender
+de modelos 3D.</li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="muchas-gracias">Muchas gracias</h3>
 </section>
     </div>
   </div>
